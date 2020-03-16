@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if not request.user.is_authenticated %}
 <h1>Hello there, welcome to the trading post</h1>
-
+{% else %}
+<h1>Hey there {{ user.first_name }}! Welcome to your profile!</h1>
+{% endif %}
 {% endblock %}
