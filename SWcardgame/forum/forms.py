@@ -11,7 +11,7 @@ class AddPost(ModelForm):
             'text': Textarea(boost),
             'created_at': DateInput({'class': 'form-control', 'type': 'date'})
         }
-       
+
 class AddComment(ModelForm):
     title = forms.CharField(label=_("Title"), max_length=60, required=True)
     text = forms.CharField(label=_("First message"), widget=TinyMCE(

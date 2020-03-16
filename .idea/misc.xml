@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6 (SWcardgame)" project-jdk-type="Python SDK" />
+=======
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.8 (django) (4)" project-jdk-type="Python SDK" />
+>>>>>>> f55b293ab4effdc35032112d4a816e080c08985c
   <component name="PyCharmProfessionalAdvertiser">
     <option name="shown" value="true" />
   </component>

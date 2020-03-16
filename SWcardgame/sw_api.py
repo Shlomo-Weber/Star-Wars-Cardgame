@@ -1,11 +1,7 @@
 import requests
 import json
 
-<<<<<<< HEAD
 cards=[]
-=======
-cards = []
->>>>>>> ef8e0e2588af55f438502441b6f2fdcb6edd1dcd
 
 def get_characters(number):
     for n in range(1,number):
