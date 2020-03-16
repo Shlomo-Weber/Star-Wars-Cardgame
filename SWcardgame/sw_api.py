@@ -1,15 +1,20 @@
 import requests
 import json
 
+cards = []
+
 def get_characters(number):
-    for number in range(1,30):
-        response = requests.get(f'https://swapi.co/api/people/{number}')
+    for n in range(1,number):
+        response = requests.get(f'https://swapi.co/api/people/{n}')
         print(response)
         info = response.json()
         print(info)
+        char_name = info['name']
+        cards.append(char_name)
+        print(cards)
 
 def get_species(number):
-    for number in range(1,30):
+    for number in range(1,31):
         response = requests.get(f'https://swapi.co/api/species/{number}')
         print(response)
         info = response.json()
@@ -22,4 +27,4 @@ def get_films(number):
         info = response.json()
         print(info)
 
-get_films(8)
+get_characters(6)
