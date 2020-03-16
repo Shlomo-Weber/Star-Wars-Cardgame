@@ -57,7 +57,7 @@ ROOT_URLCONF = 'SWcardgame.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,8 +81,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'SW Cardgame',
         'HOST': 'localhost',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres'
+        'USER': 'racheljakob',
+        'PASSWORD': 'dev770'
     }
 }
 
