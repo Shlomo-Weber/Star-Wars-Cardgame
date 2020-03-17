@@ -10,7 +10,8 @@
     <p class="card-text">{{post.text}}</p>
     <a href="{% url 'show_post' post.id %}" class="card-link">Go to post</a>
     {% for comment in post.comment_set.all %}
-     <p> {{comment.text}} </p>{% endfor %}
+     <p> User - {{comment.user}}: {{comment.text}}
+  </p>{% endfor %}
 
   </div>
 </div>

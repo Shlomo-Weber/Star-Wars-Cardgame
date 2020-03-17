@@ -21,6 +21,7 @@ def show_post(request, post_id):
             comment.post = post
             comment.user = request.user
             comment.save()
+            return redirect('Forum')
     else:
         form = CommentForm()
     return render(request, 'forum/show_post.html', {'boot': post, 'form': form})
