@@ -81,8 +81,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'SW Cardgame',
         'HOST': 'localhost',
-        'USER': 'racheljakob',
-        'PASSWORD': 'dev770'
+        'USER': 'postgres',
+        'PASSWORD': 'postgres'
     }
 }
 
