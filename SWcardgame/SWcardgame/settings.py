@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'SWcardgame.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'SW Cardgame',
+        'NAME': 'SW Cardgame2',
         'HOST': 'localhost',
         'USER': 'racheljakob',
         'PASSWORD': 'dev770'

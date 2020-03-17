@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Welcome to our Forum Page!</h1>
+
+<div class="card" style="width: 18rem; text-align:center">
+  <div class="card-body" style="text-align:center">
+    <h5 class="card-title">{{boot.title}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{boot.created_at}}</h6>
+    <p class="card-text">{{boot.text}}</p>
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
+
+
+{% endblock %}

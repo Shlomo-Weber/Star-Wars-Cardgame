@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Welcome to our Forum Page!</h1>
+{% for post in boots %}
+
+<div class="card" style="width: 18rem; text-align:center">
+  <div class="card-body" style="text-align:center">
+    <h5 class="card-title">{{post.title}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{post.created_at}}</h6>
+    <p class="card-text">{{post.text}}</p>
+    <a href="{% url 'show_post' post.id %}" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
+
+{% endfor %}
+
+
+{% endblock %}
