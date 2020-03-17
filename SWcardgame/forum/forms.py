@@ -1,7 +1,8 @@
 from django.forms import *
+from django.forms import ModelForm
 from .models import *
 
-class AddPost(ModelForm):
+class PostForm(ModelForm):
    class Meta:
         boost = {'class': 'form-control'}
         fields = ['title', 'text']
@@ -12,7 +13,7 @@ class AddPost(ModelForm):
             'created_at': DateInput({'class': 'form-control', 'type': 'date'})
         }
 
-class AddComment(ModelForm):
+class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ('title', 'text')
+        fields = ('post', 'text')
