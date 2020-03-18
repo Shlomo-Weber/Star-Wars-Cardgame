@@ -3,11 +3,9 @@ from django.contrib.auth.models import User
 from .forms import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, logout as dlogout, login as dlogin
+from .models import Profile
 # Create your views here.
 
-# def login(request):
-#
-#     return render(request, )
 
 def home(request):
 
@@ -42,3 +40,13 @@ def logout(request):
     dlogout(request)
     return redirect('home')
 
+def create_profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        profile_f = form.save(commit=False)
+        profile_f.user = request.user
+        profile_f.save()
+        return redirect('home')
+    else:
+        form = ProfileForm()
+        return render(request, 'accounts/create_profile.html', {'form':form})

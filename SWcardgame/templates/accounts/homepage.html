@@ -4,6 +4,7 @@
 {% if not request.user.is_authenticated %}
 <h1>Hello there, welcome to the trading post</h1>
 {% else %}
-<h1>Hey there {{ user.first_name }}! Welcome to your profile!</h1>
+<h1>Hey there {{ user.first_name }}! Welcome to your homepage!</h1>
+<a href="{% url 'create_profile'%}"><button><h4>Click here to create your user profile!</h4></button></a>
 {% endif %}
 {% endblock %}

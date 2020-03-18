@@ -3,34 +3,47 @@ import json
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'SWcardgame.settings')
 import django
-
 django.setup()
 from trading_post.models import *
+import random
+from accounts.models import Type
+
+def add_types():
+    type_choices = ['Jedi','Sith','Hutt','Bounty Hunter','Tusken Raider', 'Droid']
+    for type in type_choices:
+        t = Type(name = type)
+        print('adding types')
+        t.save()
 
 def get_characters(number):
-    for n in range(1,number):
-        char_response = requests.get(f'https://swapi.co/api/people/{n}')
-        print(char_response)
-        char_response=char_response.json()
-        for i in char_response['species'.split('/')]:
+    n=1
+    while Card.objects.all().count() < number:
+        print(f'Creating character {n}/{number}')
+        response = requests.get(f'https://swapi.co/api/people/{n}')
+        n += 1
+        print(response)
+        if response.status_code == 404:
+            continue
+        response=response.json()
+        for i in response['species'][0].split('/'):
             if i.isdigit():
                 species = Species.objects.get(id=i)
-        print(char_response['name'])
+        print(response['name'])
         if not species:
-            species = Species.objects.get(id=1)
-        card = Card(title=char_response['name'], species = species, )
+            species = Species.objects.get(id=random.choice([1,2,3,4,5]))
+        card, created = Card.objects.get_or_create(title=response['name'], species=species)
+        card.save()
 
 def get_species():
     response = requests.get('https://swapi.co/api/species/')
-    for n in range(1, response['count']):
+    response = response.json()
+    for n in range(1, response['count'] + 1):
+        print(f'Creating species {n}')
         response = requests.get(f'https://swapi.co/api/species/{n}')
-        for i in response['species'].split('/'):
-            species = Species.objects.get(id=i)
-            print(response)
-            if not species:
-                species = Species.objects.get(id=1)
-        # species = Species(name = response['name'])
-
+        response = response.json()
+        print(response['name'])
+        species = Species(name=response['name'])
+        species.save()
 
 
 def get_films(number):
@@ -39,5 +52,8 @@ def get_films(number):
         print(response)
         info = response.json()
         print(info)
+if Species.objects.all().count()<5:
+    get_species()
 
-get_characters(4)
+
+add_types()
