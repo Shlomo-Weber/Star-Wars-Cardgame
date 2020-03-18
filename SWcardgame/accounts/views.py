@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.models import User
 from .forms import *
 from django.contrib import messages
@@ -43,10 +43,11 @@ def logout(request):
 def create_profile(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST)
-        profile_f = form.save(commit=False)
-        profile_f.user = request.user
-        profile_f.save()
-        return redirect('home')
+        if form.is_valid():
+            profile_f = form.save(commit=False)
+            profile_f.user = request.user
+            profile_f.save()
+            return redirect('home')
     else:
         form = ProfileForm()
         return render(request, 'accounts/create_profile.html', {'form':form})
