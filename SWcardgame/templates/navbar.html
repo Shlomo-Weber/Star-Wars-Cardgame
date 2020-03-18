@@ -1,44 +1,44 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-danger">
-  <a class="navbar-brand" href="{% url 'home' %}" style="text-align:auto;">Star Wars Trading Card Game</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="{% url 'home' %}">Star Wars Cards</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active">
+      <li class="nav-item btn btn-outline-secondary btn-sm">
         <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
       </li>
       {% if not request.user.is_authenticated %}
-       <li class="nav-item active">
+       <li class="nav-item btn btn-outline-secondary btn-sm">
         <a class="nav-link" href="{% url 'signup' %}">Signup</a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item btn btn-outline-secondary btn-sm">
         <a class="nav-link" href="{% url 'login' %}">Login</a>
       </li>
       {% elif user.is_superuser %}
-      <li class="nav-item active">
+      <li class="nav-item btn btn-outline-secondary btn-sm">
         <a class="nav-link " href="#">Add Card</a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item btn btn-outline-secondary btn-sm">
         <a class="nav-link " href="#">Play</a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item btn btn-outline-secondary btn-sm">
         <a class="nav-link" href="{% url 'Forum' %}">Forum</a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item btn btn-outline-secondary btn-sm">
         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
       </li>
       {% else %}
-      <li class="nav-item active">
+      <li class="nav-item btn btn-outline-success btn-sm">
         <a class="nav-link" href="{% url 'Forum' %}">Forum</a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item btn btn-outline-success btn-sm">
         <a class="nav-link " href="#">Trading Post</a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item btn btn-outline-success btn-sm">
         <a class="nav-link " href="#">Play!</a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item btn btn-outline-success btn-sm">
         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
       </li>
       {% endif %}

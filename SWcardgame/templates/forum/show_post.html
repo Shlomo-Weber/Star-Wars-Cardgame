@@ -17,7 +17,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{ post.title }}</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{ boot.title }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -38,5 +38,14 @@
   </div>
 </div>
 
+{% for comment in boot.comment_set.all %}
+    <div class="card">
+  <div class="card-body">
+    {{ comment.text }}
+    <p>Created at: {{ comment.created_at }}</p>
+    <p>By: {{ comment.user.get_full_name }}</p>
+  </div>
+</div>
+{% endfor %}
 
 {% endblock %}

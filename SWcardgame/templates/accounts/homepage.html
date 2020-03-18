@@ -2,8 +2,11 @@
 
 {% block content %}
 {% if not request.user.is_authenticated %}
-<h1>Hello there, welcome to the trading post</h1>
+{% load static %}
+<h1>WELCOME TO THE STAR WARS TRADING POST</h1>
+<img src="1.jpg" class="img-fluid" alt="Responsive image">
 {% else %}
 <h1>Hey there {{ user.first_name }}! Welcome to your profile!</h1>
 {% endif %}
 {% endblock %}
+

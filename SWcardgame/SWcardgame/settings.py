@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'SWcardgame.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'SW Cardgame2',
+        'NAME': 'SW Cardgame3',
         'HOST': 'localhost',
         'USER': 'racheljakob',
         'PASSWORD': 'dev770'
@@ -124,3 +124,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
