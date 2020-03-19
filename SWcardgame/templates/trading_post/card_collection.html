@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% for card in cards %}
-<div class="container">
+
+<div class="container-fluid">
+  <div class="row">
+    {% for card in cards %}
+    <div class="col-lg-4 mt-4">
 <div class="card" style="width: 15rem;">
-  <img class="card-img-top" src="..." alt="Card image cap">
+  <img class="card-img-top" src="" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">{{ card.title }}</h5>
     <p class="card-text">{{ card.species.name }}</p>
@@ -13,7 +16,10 @@
     Rarity: {{ card.films.all.count }}
   </ul>
 </div>
+       </div>
+    {% endfor %}
+    </div>
   </div>
 
-{% endfor %}
+
 {% endblock %}

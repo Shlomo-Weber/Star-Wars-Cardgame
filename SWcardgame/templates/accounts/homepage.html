@@ -1,10 +1,23 @@
-{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/swstyle.css' %}">
+</head>
+<body>
+<body class="img-fluid" style="background-image: url('{% static 'images/4.jpg' %}')">
 
-{% block content %}
-{% if not request.user.is_authenticated %}
-<h1>Hello there, welcome to the trading post</h1>
+<h1 class="welcome">WELCOME TO THE STAR WARS TRADING POST</h1>
+{% if not request.user.is_authenticated and not request.user.profile %}
+<a href="{% url 'login'%}"><button id="login" class="btn btn-outline-danger"><h4>LOGIN</h4></button></a><br>
+<a href="{% url 'signup'%}"><button id="signup" class="btn btn-outline-danger"><h4>SIGN-UP</h4></button></a>
+
 {% else %}
-<h1>Hey there {{ user.first_name }}! Welcome to your homepage!</h1>
-<a href="{% url 'create_profile'%}"><button><h4>Click here to create your user profile!</h4></button></a>
+<h1 class="welcome">Hey there {{ user.first_name }}! Welcome to your homepage!</h1>
+<a href="{% url 'login'%}"><button id="login" class="btn btn-outline-danger"><h4>LOGIN</h4></button></a><br>
 {% endif %}
-{% endblock %}
+</body>
+</html>

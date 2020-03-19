@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .forms import *
 from django.contrib import messages
@@ -31,7 +31,7 @@ def login(request):
         if form.is_valid():
             user = authenticate(username = form.cleaned_data['username'], password = form.cleaned_data['password'])
             dlogin(request, user)
-            return redirect('home')
+            return redirect('profile')
     else:
         form = LoginForm()
     return render(request, 'accounts/login.html', {'form':form})
@@ -42,12 +42,14 @@ def logout(request):
 
 def create_profile(request):
     if request.method == 'POST':
-        form = ProfileForm(request.POST)
+        form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
             profile_f = form.save(commit=False)
             profile_f.user = request.user
             profile_f.save()
-            return redirect('home')
+            return redirect('profile')
+        messages.warning(request, 'This is not a valid form')
+        return redirect('create_profile')
     else:
         form = ProfileForm()
         return render(request, 'accounts/create_profile.html', {'form':form})
