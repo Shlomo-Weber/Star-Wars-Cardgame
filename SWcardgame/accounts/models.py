@@ -10,8 +10,8 @@ class Type(Model):
 class Profile(Model):
     name = CharField(max_length=100, unique=True)
     type = ForeignKey(Type, null=True, on_delete=SET_NULL)
-    user = OneToOneField(User, on_delete=CASCADE)
-    # avatar = ImageField(upload_to=)
+    user = OneToOneField(User, unique=True, on_delete=CASCADE)
+    avatar = ImageField(upload_to='accounts/pictures', null=True, blank=True, default='accounts/pictures/st_404.jpg')
     credits = IntegerField(null=True, blank=True, default=10)
     bio = TextField(null=True, blank=True, default='May the Shwartz be with yous')
 

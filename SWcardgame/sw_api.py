@@ -23,7 +23,7 @@ def get_characters(number):
         response = requests.get(f'https://swapi.co/api/people/{n}')
         n += 1
         print(response)
-        if response.status_code == 404:
+        if not response.status_code == 200:
             continue
         response=response.json()
         for i in response['species'][0].split('/'):
@@ -34,6 +34,14 @@ def get_characters(number):
             species = Species.objects.get(id=random.choice([1,2,3,4,5]))
         card, created = Card.objects.get_or_create(title=response['name'], species=species)
         card.save()
+        for film in response['films']:
+            for i in film.split('/'):
+                if i.isdigit():
+                    films = Film.objects.get(id=i)
+                    card.films.add(films)
+
+
+
 
 def get_species():
     response = requests.get('https://swapi.co/api/species/')
@@ -46,17 +54,36 @@ def get_species():
         species = Species(name=response['name'])
         species.save()
 
+# def get_films(number):
+#     for number in range(1,8):
+#         response = requests.get(f'https://swapi.co/api/films/{n}')
+#         print(response)
+#         info = response.json()
+#         print(info)
 
-def get_films(number):
-    for number in range(1,8):
-        response = requests.get(f'https://swapi.co/api/films/{n}')
-        print(response)
-        info = response.json()
-        print(info)
+def get_films():
+    response = requests.get(f'https://swapi.co/api/films/')
+    print(response.status_code)
+    res_films = response.json()
+    print(res_films)
+    films = res_films['results']
+    for film in films:
+        name = film['title']
+        movie, created = Film.objects.get_or_create(title=name)
+        movie.save()
+        print('Added films')
+
+
 
 if Species.objects.all().count()<5:
     get_species()
 
+if Film.objects.all().count()<7:
+    get_films()
 
-# get_characters(30)
-add_types()
+get_characters(30)
+
+# add_types()
+
+
+
