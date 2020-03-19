@@ -1,5 +1,6 @@
 from django import forms
-
+from django.forms import ModelForm
+from .models import Profile
 class SignupForm(forms.Form):
     username = forms.CharField(max_length=60)
     password = forms.CharField(max_length=60, widget=forms.PasswordInput())
@@ -12,6 +13,7 @@ class LoginForm(forms.Form):
     username = forms.CharField(max_length=60)
     password = forms.CharField(max_length=60, widget=forms.PasswordInput())
 
-# class ProfileForm(forms.Form):
-#     name = forms.CharField(max_length=60)
-#     species = forms.ChoiceField()
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = '__all__'

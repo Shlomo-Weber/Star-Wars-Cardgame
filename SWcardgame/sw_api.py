@@ -6,6 +6,14 @@ import django
 django.setup()
 from trading_post.models import *
 import random
+from accounts.models import Type
+
+def add_types():
+    type_choices = ['Jedi','Sith','Hutt','Bounty Hunter','Tusken Raider', 'Droid']
+    for type in type_choices:
+        t = Type(name = type)
+        print('adding types')
+        t.save()
 
 
 def get_characters(number):
@@ -27,7 +35,6 @@ def get_characters(number):
         card, created = Card.objects.get_or_create(title=response['name'], species=species)
         card.save()
 
-
 def get_species():
     response = requests.get('https://swapi.co/api/species/')
     response = response.json()
@@ -38,7 +45,6 @@ def get_species():
         print(response['name'])
         species = Species(name=response['name'])
         species.save()
-
 
 
 def get_films(number):
@@ -52,4 +58,5 @@ if Species.objects.all().count()<5:
     get_species()
 
 
-get_characters(30)
+# get_characters(30)
+add_types()

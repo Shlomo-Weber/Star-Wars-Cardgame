@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 {% if not request.user.is_authenticated %}
-{% load static %}
 <h1>WELCOME TO THE STAR WARS TRADING POST</h1>
-<img src="1.jpg" class="img-fluid" alt="Responsive image">
+<img src="{% static 'images/1.jpg' %}" class="img-fluid" alt="Responsive image">
 {% else %}
-<h1>Hey there {{ user.first_name }}! Welcome to your profile!</h1>
+<h1>Hey there {{ user.first_name }}! Welcome to your homepage!</h1>
+<a href="{% url 'create_profile'%}"><button><h4>Click here to create your user profile!</h4></button></a>
 {% endif %}
 {% endblock %}
 
