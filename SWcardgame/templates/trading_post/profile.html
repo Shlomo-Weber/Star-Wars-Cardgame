@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>This is your profile, woopdidoo</h1>
+<div class="card ml-5" style="width: 16rem; ">
+  <img class="card-img-top" src="{{ request.user.profile.avatar.url }}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ request.user.profile.name }}</h5>
+    <p class="card-text"> {{ request.user.profile.type }}</p>
+    <p class="card-text"> {{ request.user.profile.user }}</p>
+  </div>
+</div>
+<a href="{% url 'start_game' %}" class="btn btn-{% if request.user.profile.type.name == 'Sith' %}danger {% else %}info {% endif %}">Start Game!</a>
+
+{% endblock %}

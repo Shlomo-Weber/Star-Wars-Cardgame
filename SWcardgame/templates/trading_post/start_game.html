@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>This is your profile, woopdidoo</h1>
+<div class="card ml-5" style="width: 16rem; ">
+  <img class="card-img-top" src="{{ request.user.profile.avatar.url }}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ request.user.profile.name }}</h5>
+    <p class="card-text"> {{ request.user.profile.type }}</p>
+    <p class="card-text"> {{ request.user.profile.user }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    {% for card in cards %}
+    <li>
+      <h6>Name: {{ card.title }}</h6>
+      <h6>Rarity:  {{ card.films.all.count }}</h6>
+      <span><a href="#" class="btn btn-danger">Reselect a card</a></span>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

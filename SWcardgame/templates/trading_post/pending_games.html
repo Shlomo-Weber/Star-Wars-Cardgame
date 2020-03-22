@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<ul class="list-group">
+{% for game in games %}
+<li class="list-group-item">CHALLENGER: {{ game.initiator.name }}</li>
+
+{% endfor %}
+</ul>
+{% endblock %}

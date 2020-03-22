@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/swstyle.css' %}">
 </head>
-<body>
+
 <body class="img-fluid" style="background-image: url('{% static 'images/4.jpg' %}')">
 <h1 class="welcome">WELCOME TO THE STAR WARS TRADING POST</h1>
 {% if not request.user.is_authenticated and not request.user.profile %}

@@ -8,6 +8,7 @@ from trading_post.models import *
 import random
 from accounts.models import Type
 
+
 def add_types():
     type_choices = ['Jedi','Sith','Hutt','Bounty Hunter','Tusken Raider', 'Droid']
     for type in type_choices:
@@ -74,7 +75,6 @@ def get_films():
         print('Added films')
 
 
-
 if Species.objects.all().count()<5:
     get_species()
 
@@ -83,7 +83,7 @@ if Film.objects.all().count()<7:
 
 get_characters(30)
 
-# add_types()
+add_types()
 
 
 

@@ -7,6 +7,7 @@ from .models import Profile
 # Create your views here.
 def home(request):
     return render(request, 'accounts/homepage.html')
+
 def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -19,19 +20,24 @@ def signup(request):
     else:
         form = SignupForm()
     return render(request, 'accounts/signup.html', {'form': form})
+
 def login(request):
     if request.method =='POST':
         form = LoginForm(request.POST)
         if form.is_valid():
             user = authenticate(username = form.cleaned_data['username'], password = form.cleaned_data['password'])
             dlogin(request, user)
-            return redirect('profile')
+            if Profile.objects.filter(user=user).exists():
+                return redirect('profile')
+            return redirect('create_profile')
     else:
         form = LoginForm()
     return render(request, 'accounts/login.html', {'form':form})
+
 def logout(request):
     dlogout(request)
     return redirect('home')
+
 def create_profile(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES)

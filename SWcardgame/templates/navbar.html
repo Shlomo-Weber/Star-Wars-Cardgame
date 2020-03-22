@@ -36,10 +36,13 @@
         <a class="nav-link " href="#">Trading Post</a>
       </li>
       <li class="nav-item btn btn-outline-success btn-sm">
+        <a class="nav-link " href="{% url 'profile' %}"> Profile</a>
+      </li>
+      <li class="nav-item btn btn-outline-success btn-sm">
         <a class="nav-link " href="{% url 'card_collection' %}">Card Collection</a>
       </li>
       <li class="nav-item btn btn-outline-success btn-sm">
-        <a class="nav-link " href="#">Play!</a>
+        <a class="nav-link " href="{% url 'start_game' %}">Play!</a>
       </li>
       <li class="nav-item btn btn-outline-success btn-sm">
         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
