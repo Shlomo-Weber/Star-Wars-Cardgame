@@ -17,7 +17,7 @@
   <div class="row">
 {% for card in request.user.profile.deck.cards.all %}
     <div class="col-lg-4 mt-4">
-<div class="card" style="width: 15rem;">
+<div class="card" style="width: 15rem; border-color: black; border-size: 4px 4px solid">
   <img class="card-img-top" src="" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">{{ card.title }}</h5>
