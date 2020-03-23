@@ -10,12 +10,17 @@
   <img class="card-img-top" src="" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">{{ trade.card.title }}</h5>
+    <h6 class="card-text">Offered By: {{ trade.profile.name }}</h6>
     <p class="card-text">{{ trade.card.species.name }}</p>
   </div>
   <ul class="list-group list-group-flush">
     Rarity: {{ trade.card.films.all.count }}
   </ul>
+  {% if trade.profile != request.user.profile %}
     <a href="{% url 'make_offer' trade.id %}" class="btn btn-success">MAKE AN OFFER</a>
+  {% else %}
+  <a href="{% url 'delete_trade' trade.id %}" class="btn btn-success">CANCEL TRADE</a>
+  {% endif %}
 </div>
        </div>
     {% endfor %}

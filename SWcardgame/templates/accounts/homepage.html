@@ -15,7 +15,7 @@
 <a href="{% url 'signup'%}"><button id="signup" class="btn btn-outline-danger"><h4>SIGN-UP</h4></button></a>
 {% else %}
 <h1 class="welcome">Hey there {{ user.first_name }}! Welcome to your homepage!</h1>
-<a href="{% url 'login'%}"><button id="login" class="btn btn-outline-danger"><h4>LOGIN</h4></button></a><br>
+<a href="{% url 'profile'%}"><button id="login" class="btn btn-outline-danger"><h4>PROFILE</h4></button></a><br>
 {% endif %}
 </body>
 </html>

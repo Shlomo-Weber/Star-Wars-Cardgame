@@ -50,16 +50,19 @@ def switch_card(request, card_id):
 def initiate_trade(request, card_id):
     card = Card.objects.get(id=card_id)
     trade, created = Trade.objects.get_or_create(card= card, profile = request.user.profile)
-    return redirect('show_trades')#TODO write url
+    return redirect('all_trades')
 
 
 def show_trades(request):
     trades = Trade.objects.all()
-    return render(request, 'trading_post/all_trades.html', {'trades':trades})#TODO write url
+    return render(request, 'trading_post/all_trades.html', {'trades':trades})
 
 
 def make_offer(request, trade_id):
     trade = Trade.objects.get(id=trade_id)
+    if request.user.profile == trade.profile:
+        messages.error(request, "CAN'T MAKE OFFER ON OWN TRADE!")
+        return redirect('all_trades')
     if request.method == 'POST':
         form = OfferForm(request.POST)
         if form.is_valid():
@@ -67,10 +70,61 @@ def make_offer(request, trade_id):
             offer.trade = trade
             offer.profile = request.user.profile
             offer.save()
-            return redirect('show_trades')
+            return redirect('all_trades')
         messages.error(request, 'FORM ERROR')
     form = OfferForm()
     form.fields['card'].queryset = request.user.profile.deck.cards.all()
-    return render(request, 'trading_post/make_offer.html',{'form':form})#TODO write url
+    return render(request, 'trading_post/make_offer.html',{'form':form})
+
+
+def delete_trade(request, trade_id):
+    trade = Trade.objects.get(id=trade_id)
+    if request.user.profile != trade.profile:
+        messages.error(request, "CAN ONLY DELETE YOUR OWN TRADES!")
+        return redirect('all_trades')
+    trade.delete()
+    messages.success(request, 'TRADE REMOVED SUCCESSFULLY')
+    return redirect('all_trades')
+
+def my_trades(request):
+    trades = request.user.profile.trade_set.all().exclude(status='A')
+    return render(request, 'trading_post/show_offers.html', {'trades':trades})
+
+
+def handle_offer(request, offer_id, status):
+    offer = Offer.objects.get(id=offer_id)
+    if status == 1:
+        offer.status = 'A'
+
+        trade_card = offer.trade.card
+        offer_card = offer.card
+        #managing original trade makers cards
+        offer.trade.profile.deck.cards.remove(trade_card)
+        offer.trade.profile.deck.cards.add(offer_card)
+        if trade_card in offer.trade.profile.deck.hand.all():
+            offer.trade.profile.deck.hand.remove(trade_card)
+            offer.trade.profile.deck.hand.add(offer_card)
+
+        #managing offer makers cards
+        offer.profile.deck.cards.remove(offer_card)
+        offer.profile.deck.cards.add(trade_card)
+        if trade_card in offer.profile.deck.hand.all():
+            offer.profile.deck.hand.remove(offer_card)
+            offer.profile.deck.hand.add(trade_card)
+
+        #setting all other offers to rejected
+        for offer1 in offer.trade.offer_set.all():
+            if offer1 != offer:
+                offer1.status = 'R'
+                offer1.save()
+        trade = offer.trade
+        trade.status = 'A'
+        trade.save()
+    else:
+        offer.status = 'R'
+    offer.save()
+    return redirect('my_trades')
+
+
 
 

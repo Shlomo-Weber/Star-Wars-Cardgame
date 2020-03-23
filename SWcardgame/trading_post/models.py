@@ -48,3 +48,4 @@ class Offer(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
     status = models.CharField(choices=STATUS_CHOICES, default='P', max_length = 10)
+

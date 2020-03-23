@@ -5,7 +5,8 @@
    <div class="jumbotron-content">
        <h2 class="display-4"> Name: {{ request.user.profile.name }}</h2>
    <h2 class="display-5"> Class: {{ request.user.profile.type }}</h2>
-   <h2 class="display-5"> User: {{ request.user.profile.user }}</h2>
+   <h2 class="display-5"> User: {{ request.user }}</h2>
+       <a href="{% url 'my_trades' %}" class="btn btn-info">MY TRADES</a>
    </div>
  </div>
 <div class="card ml-5" style="width: 16rem">
