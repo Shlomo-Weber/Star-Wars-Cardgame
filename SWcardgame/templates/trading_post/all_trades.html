@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+  <div class="row">
+    {% for trade in trades %}
+    <div class="col-lg-4 mt-4">
+<div class="card" style="width: 15rem;">
+  <img class="card-img-top" src="" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ trade.card.title }}</h5>
+    <p class="card-text">{{ trade.card.species.name }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    Rarity: {{ trade.card.films.all.count }}
+  </ul>
+    <a href="{% url 'make_offer' trade.id %}" class="btn btn-success">MAKE AN OFFER</a>
+</div>
+       </div>
+    {% endfor %}
+    </div>
+  </div>
+
+
+{% endblock %}

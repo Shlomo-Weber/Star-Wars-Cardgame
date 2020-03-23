@@ -1,15 +1,36 @@
 {% extends 'base.html' %}
 {% block content %}
-
 <h1>This is your profile, woopdidoo</h1>
-<div class="card ml-5" style="width: 16rem; ">
+<div class="jumbotron" style="background-color:  #4da6ff">
+   <div class="jumbotron-content">
+       <h2 class="display-4"> Name: {{ request.user.profile.name }}</h2>
+   <h2 class="display-5"> Class: {{ request.user.profile.type }}</h2>
+   <h2 class="display-5"> User: {{ request.user.profile.user }}</h2>
+   </div>
+ </div>
+<div class="card ml-5" style="width: 16rem">
   <img class="card-img-top" src="{{ request.user.profile.avatar.url }}" alt="Card image cap">
   <div class="card-body">
-    <h5 class="card-title">{{ request.user.profile.name }}</h5>
-    <p class="card-text"> {{ request.user.profile.type }}</p>
-    <p class="card-text"> {{ request.user.profile.user }}</p>
   </div>
 </div>
-<a href="{% url 'start_game' %}" class="btn btn-{% if request.user.profile.type.name == 'Sith' %}danger {% else %}info {% endif %}">Start Game!</a>
-
+<div class="container-fluid">
+  <div class="row">
+{% for card in request.user.profile.deck.cards.all %}
+    <div class="col-lg-4 mt-4">
+<div class="card" style="width: 15rem;">
+  <img class="card-img-top" src="" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ card.title }}</h5>
+    <p class="card-text">{{ card.species.name }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    Rarity: {{ card.films.all.count }}
+  </ul>
+    <a href="{% url 'start_trade' card.id %}">OFFER FOR TRADING</a>
+</div>
+       </div>
+{% endfor %}
+     </div>
+  </div>
+<a href="{% url 'start_game' %}" class=" prof_btn btn btn-{% if request.user.profile.type.name == 'Sith' %}success {% else %}info {% endif %}">Start Game!</a>
 {% endblock %}

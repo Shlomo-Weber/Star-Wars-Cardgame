@@ -30,3 +30,8 @@ margin-bottom: 150px;
     cursor: pointer;
     overflow: hidden;
 }
+
+.prof_btn{
+display: flex;
+justify-content: center;
+}

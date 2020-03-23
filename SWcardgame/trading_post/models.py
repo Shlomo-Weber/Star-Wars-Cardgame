@@ -3,6 +3,12 @@ from django.contrib.auth.models import User
 from accounts.models import Profile
 # Create your models here.
 
+STATUS_CHOICES = {
+    ('A', 'Accepted'),
+    ('R', 'Rejected'),
+    ('P', 'Pending'),
+}
+
 class Card(models.Model):
     title = models.CharField(max_length=60)
     species = models.ForeignKey('Species', on_delete=models.CASCADE, null=True)
@@ -21,13 +27,24 @@ class Film(models.Model):
 
 
 class Deck(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
     cards = models.ManyToManyField(Card, related_name = "deck_cards")
     hand = models.ManyToManyField(Card, related_name = "deck_hand_cards")
+    mulligans = models.IntegerField(default=0)
+
 
 class Game(models.Model):
     initiator = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name ='initiator')
     other_player = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name = 'other_player', null = True)
-    initiator_deck = models.ForeignKey(Deck, on_delete=models.CASCADE, related_name = 'initiator_deck')
-    other_deck = models.ForeignKey(Deck, on_delete=models.CASCADE, related_name = 'other_deck', null = True)
 
+class Trade(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    card = models.ForeignKey(Card, on_delete=models.CASCADE)
+    status = models.CharField(choices=STATUS_CHOICES, default='P', max_length=10)
+
+
+class Offer(models.Model):
+    trade = models.ForeignKey(Trade, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    card = models.ForeignKey(Card, on_delete=models.CASCADE)
+    status = models.CharField(choices=STATUS_CHOICES, default='P', max_length = 10)

@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>This is your profile, woopdidoo</h1>
+<h1>FEEL THE POWER</h1>
+<h1 style="text-align:center;"> Total Points : {{ points }}</h1>
 <div class="card ml-5" style="width: 16rem; ">
   <img class="card-img-top" src="{{ request.user.profile.avatar.url }}" alt="Card image cap">
   <div class="card-body">
@@ -9,14 +10,22 @@
     <p class="card-text"> {{ request.user.profile.type }}</p>
     <p class="card-text"> {{ request.user.profile.user }}</p>
   </div>
-  <ul class="list-group list-group-flush">
-    {% for card in cards %}
-    <li>
-      <h6>Name: {{ card.title }}</h6>
-      <h6>Rarity:  {{ card.films.all.count }}</h6>
-      <span><a href="#" class="btn btn-danger">Reselect a card</a></span>
-    </li>
-    {% endfor %}
-  </ul>
 </div>
-{% endblock %}
+<!--Cards-->
+<div class="container-fluid">
+  <div class="row">
+    {% for card in request.user.profile.deck.hand.all %}
+    <div class="col-lg-4 mt-4">
+    <div class="card" style="width: 15rem;">
+<!--  <img class="card-img-top" src="{{ request.user.profile.avatar.url }}" alt="Card image cap">-->
+  <div class="card-body">
+    <h5 class="card-title">{{ card.title }}</h5>
+    <h5 class="card-title">Rarity: {{ card.films.all.count }}</h5>
+    <span><a href="{% url 'switch_card' card.id %}" class="btn btn-success">Reshuffle card</a></span>
+  </div>
+</div>
+       </div>
+    {% endfor %}
+    </div>
+ </div>
+{% endblock %}n
